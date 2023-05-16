@@ -5,10 +5,10 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.init();
-  Logger.log(
-    `🚀 Accounts is running!`
-  );
+  const globalPrefix = 'api';
+  app.setGlobalPrefix(globalPrefix);
+  const PORT = process.env.PORT || 4000;
+  await app.listen(PORT, () => Logger.log(`🚀 Server has been started on PORT: ${PORT}/${globalPrefix}`))
 }
 
 bootstrap();
